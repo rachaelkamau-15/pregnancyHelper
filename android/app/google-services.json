@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "837009360616",
+    "project_id": "genesis-pregnancy-helper",
+    "storage_bucket": "genesis-pregnancy-helper.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:837009360616:android:817cd96a961cf383332b5d",
+        "android_client_info": {
+          "package_name": "com.example.pregnancy_helper"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "837009360616-8gjhde3fqn2lr6ulhh3jjat5m2hk9s5l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCGTBE13Die-bk52cYBtYCYLZ9v6bbF99w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "837009360616-8gjhde3fqn2lr6ulhh3jjat5m2hk9s5l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
