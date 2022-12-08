@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pregnancy_helper/screens/welcome.dart';
+import 'package:pregnancy_helper/screens/dashboard.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -19,7 +19,7 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     Timer(
       Duration(seconds: 4), ()=>
-      Get.to(()=>WelcomePage())
+      Get.to(()=>Dashboard())
     );
     super.initState();
   }

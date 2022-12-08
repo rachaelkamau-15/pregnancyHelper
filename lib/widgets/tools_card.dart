@@ -55,7 +55,7 @@ class ToolsCard extends StatelessWidget {
                     style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
-                      fontSize: 16,
+                      fontSize: 18,
                     ),
                   ),
                   SizedBox(
@@ -65,7 +65,7 @@ class ToolsCard extends StatelessWidget {
                     "Essential Planning",
                     style: TextStyle(
                       color: Colors.white70,
-                      fontSize: 14,
+                      fontSize: 16,
                     ),
                   ),
                 ],

@@ -37,10 +37,10 @@ class Dashboard extends StatelessWidget {
           children: [
             Container(
               alignment: Alignment.topLeft,
-              height: Get.height * 0.8,
+              height: Get.height,
+              width: Get.width,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                image: DecorationImage(
+              image: DecorationImage(
                   image: AssetImage("images/babybg.jpg"),
                   fit: BoxFit.cover,
                   colorFilter: ColorFilter.mode(

@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
+import 'package:pregnancy_helper/screens/splash.dart';
 import '../utils/utils.dart';
 
 import '../screens/dashboard.dart';
@@ -44,7 +45,7 @@ class AuthController extends GetxController {
       firebaseUserData.value.addAll(
           fsUser.data() == null ? {} : fsUser.data() as Map<String, dynamic>);
       update();
-      Get.offAll(() => Dashboard());
+      Get.offAll(() => SplashScreen());
       Utils.dismissLoader();
     }
   }

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../controllers/auth_controller.dart';
 
 class SettingsCard extends StatelessWidget {
   const SettingsCard({super.key});
@@ -10,18 +13,26 @@ class SettingsCard extends StatelessWidget {
         title: Text("Settings"),
         backgroundColor: Color.fromARGB(195, 71, 1, 83),
         actions: [
-          IconButton(
-            onPressed: () {},
-            icon: Icon(Icons.logout, color: Colors.white70),
+          TextButton(
+            onPressed: () async {
+              await AuthController.to.signOut();
+            },
+            child: Text(
+              "Logout",
+              style:
+                  TextStyle(color: Colors.white70,),
+            ),
           ),
         ],
       ),
-      body: Text(
-        "Account", 
-        style: TextStyle(
-            color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold),
-            
+      body: Container(
+        padding: EdgeInsets.symmetric(horizontal: 152,vertical: 10),
+        color: Color.fromARGB(255, 234, 162, 247),
+        child: Text("Account",style: TextStyle(color: Colors.white70,fontWeight: FontWeight.bold),),
       ),
+      
+       
+      
     );
   }
 }

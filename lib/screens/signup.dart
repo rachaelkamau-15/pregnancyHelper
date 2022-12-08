@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:pregnancy_helper/screens/dashboard.dart';
 import 'package:pregnancy_helper/screens/login.dart';
 
+import '../controllers/auth_controller.dart';
 import '../utils/utils.dart';
 
 class SignUp extends StatefulWidget {

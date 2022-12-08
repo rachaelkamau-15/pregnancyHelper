@@ -53,18 +53,24 @@ class ExploreCard extends StatelessWidget {
               SizedBox(
                 height: 10,
               ),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 20,vertical: 20,),
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  "Track Your Progress",
-                  textAlign: TextAlign.left,
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,),
-                ),
-                
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    padding: EdgeInsets.symmetric(horizontal: 20,vertical: 20,),
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      "Track Your Progress",
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                          color: Colors.white70,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,),
+                    ),
+                    
+                  ),
+                  TextButton(onPressed: (){}, child: Text("More",style: TextStyle(color:Colors.white70,fontWeight: FontWeight.bold,),),),
+                ],
               ),
               //FIRST HORIZONTAL SCROLL
               Container(
@@ -90,18 +96,24 @@ class ExploreCard extends StatelessWidget {
                SizedBox(
                 height: 5,
               ),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 20,vertical: 20,),
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  "Nutrition",
-                  textAlign: TextAlign.left,
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,),
-                ),
-                
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    padding: EdgeInsets.symmetric(horizontal: 20,vertical: 20,),
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      "Nutrition",
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                          color: Colors.white70,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,),
+                    ),
+                    
+                  ),
+                  TextButton(onPressed: (){}, child: Text("More",style: TextStyle(color:Colors.white70,fontWeight: FontWeight.bold,),),),
+                ],
               ),
               
               //SECOND HORIZONTAL SCROLL
@@ -127,18 +139,24 @@ class ExploreCard extends StatelessWidget {
                SizedBox(
                 height: 5,
               ),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 20,vertical: 20,),
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  "Medical",
-                  textAlign: TextAlign.left,
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,),
-                ),
-                
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    padding: EdgeInsets.symmetric(horizontal: 20,vertical: 20,),
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      "Medical",
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                          color: Colors.white70,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,),
+                    ),
+                    
+                  ),
+                  TextButton(onPressed: (){}, child: Text("More",style: TextStyle(color:Colors.white70,fontWeight: FontWeight.bold,),),),
+                ],
               ),
               //THRID HORIZONTAL SCROLL
               Container(
@@ -163,18 +181,24 @@ class ExploreCard extends StatelessWidget {
               SizedBox(
                 height: 5,
               ),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 20,vertical: 20,),
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  "Exercises",
-                  textAlign: TextAlign.left,
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,),
-                ),
-                
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    padding: EdgeInsets.symmetric(horizontal: 20,vertical: 20,),
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      "Exercises",
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                          color: Colors.white70,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,),
+                    ),
+                    
+                  ),
+                  TextButton(onPressed: (){}, child: Text("More",style: TextStyle(color:Colors.white70,fontWeight: FontWeight.bold,),),),
+                ],
               ),
               //FOURTH HORIZONTAL SCROLL
               
@@ -200,19 +224,25 @@ class ExploreCard extends StatelessWidget {
               SizedBox(
                 height: 5,
               ),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 20,vertical: 20,),
-                alignment: Alignment.centerLeft,
-              
-                child: Text(
-                  "Fetility",
-                  textAlign: TextAlign.left,
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,),
-                ),
-                
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    padding: EdgeInsets.symmetric(horizontal: 20,vertical: 20,),
+                    alignment: Alignment.centerLeft,
+                  
+                    child: Text(
+                      "Fetility",
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                          color: Colors.white70,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,),
+                    ),
+                    
+                  ),
+                  TextButton(onPressed: (){}, child: Text("More",style: TextStyle(color:Colors.white70,fontWeight: FontWeight.bold,),),),
+                ],
               ),
               //FIVTH HORIZONTAL SCROLL
               Container(
@@ -237,19 +267,25 @@ class ExploreCard extends StatelessWidget {
               SizedBox(
                 height: 5,
               ),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 20,vertical: 20,),
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  "Community Forums",
-                  textAlign: TextAlign.left,
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,),
-                ),
-                
-                
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    padding: EdgeInsets.symmetric(horizontal: 20,vertical: 20,),
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      "Community Forums",
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                          color: Colors.white70,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,),
+                    ),
+                    
+                    
+                  ),
+                  TextButton(onPressed: (){}, child: Text("More",style: TextStyle(color:Colors.white70,fontWeight: FontWeight.bold,),),),
+                ],
               ),
               //SIXTH HORIZONTAL SCROLL
               Container(
