@@ -1,0 +1,214 @@
+import 'package:flutter/material.dart';
+
+class BabyCare extends StatelessWidget {
+  const BabyCare({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back,
+        color:Colors.white),
+        onPressed: () {
+          Navigator.pop(context);
+          },
+        ),
+         title: Text(
+          "Baby Care",
+          style: TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Color.fromARGB(195, 71, 1, 83),
+),
+body: Container(
+  color: Color.fromARGB(255, 234, 162, 247),
+        padding: EdgeInsets.only(left: 16, top: 25, right: 16),
+        child: ListView(
+          children: [
+            SizedBox(
+              height: 10,
+            ),
+            Row(
+              children: [
+                Icon(
+                  Icons.add,
+                  color: Color.fromARGB(195, 71, 1, 83),
+                ),
+                SizedBox(
+                  width: 8,
+                ),
+                Text(
+                  "2/3 Wash cloths",
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Row(
+              children: [
+                Icon(
+                  Icons.add,
+                  color: Color.fromARGB(195, 71, 1, 83),
+                ),
+                SizedBox(
+                  width: 8,
+                ),
+                Text(
+                  "2 Baby towels",
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Row(
+              children: [
+                Icon(
+                  Icons.add,
+                  color: Color.fromARGB(195, 71, 1, 83),
+                ),
+                SizedBox(
+                  width: 8,
+                ),
+                Text(
+                  "Baby bath oil",
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Row(
+              children: [
+                Icon(
+                  Icons.add,
+                  color: Color.fromARGB(195, 71, 1, 83),
+                ),
+                SizedBox(
+                  width: 8,
+                ),
+                Text(
+                  "Baby lotion",
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Row(
+              children: [
+                Icon(
+                  Icons.add,
+                  color: Color.fromARGB(195, 71, 1, 83),
+                ),
+                SizedBox(
+                  width: 8,
+                ),
+                Text(
+                  "Baby Shampoo",
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Row(
+              children: [
+                Icon(
+                  Icons.add,
+                  color: Color.fromARGB(195, 71, 1, 83),
+                ),
+                SizedBox(
+                  width: 8,
+                ),
+                Text(
+                  "Soft hair brush",
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Row(
+              children: [
+                Icon(
+                  Icons.add,
+                  color: Color.fromARGB(195, 71, 1, 83),
+                ),
+                SizedBox(
+                  width: 8,
+                ),
+                Text(
+                  "Cotton buds",
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Row(
+              children: [
+                Icon(
+                  Icons.add,
+                  color: Color.fromARGB(195, 71, 1, 83),
+                ),
+                SizedBox(
+                  width: 8,
+                ),
+                Text(
+                  "Nail clippers",
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Row(
+              children: [
+                Icon(
+                  Icons.add,
+                  color: Color.fromARGB(195, 71, 1, 83),
+                ),
+                SizedBox(
+                  width: 8,
+                ),
+                Text(
+                  "Soft sponge",
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Row(
+              children: [
+                Icon(
+                  Icons.add,
+                  color: Color.fromARGB(195, 71, 1, 83),
+                ),
+                SizedBox(
+                  width: 8,
+                ),
+                Text(
+                  "Baby bathing basin",
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+            ],
+        ),
+),
+    );
+  }
+}

@@ -3,9 +3,19 @@ import 'dart:html';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pregnancy_helper/controllers/auth_controller.dart';
+import 'package:pregnancy_helper/widgets/appointmentspage_card.dart';
+import 'package:pregnancy_helper/widgets/contractiontimer_card.dart';
+import 'package:pregnancy_helper/widgets/hospitalbagchecklist_card.dart';
+import 'package:pregnancy_helper/widgets/kickcounterpage_card.dart';
+import 'package:pregnancy_helper/widgets/questionspage_card.dart';
+import 'package:pregnancy_helper/widgets/settings_card.dart';
+import 'package:pregnancy_helper/widgets/shopping_categories.dart';
+import 'package:pregnancy_helper/widgets/timelinepage_card.dart';
 
 import 'appointment_card.dart';
 import 'birthplan_card.dart';
+import 'birthplanpage_card.dart';
 import 'contractions_card.dart';
 import 'hospitalbag_card.dart';
 import 'kickcounter_card.dart';
@@ -23,14 +33,27 @@ class ToolsCard extends StatelessWidget {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Color.fromARGB(195, 71, 1, 83),
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back,
+        color:Colors.white),
+        onPressed: () {
+          Navigator.pop(context);
+        },
+        ),
         actions: [
-          Container(
-            margin: EdgeInsets.only(
-              right: 25,
-            ),
-            child: CircleAvatar(
-              child: Text("RK"),
-              backgroundColor: Color.fromARGB(195, 71, 1, 83),
+          InkWell(
+            onTap:  () {
+              Get.to(() => SettingsCard());
+            },
+            child: Container(
+              margin: EdgeInsets.only(
+                right: 25,
+              ),
+              child: CircleAvatar(
+                child: Text("RK"),
+                backgroundColor: Color.fromARGB(195, 71, 1, 83),
+              ),
             ),
           ),
         ],
@@ -93,7 +116,9 @@ class ToolsCard extends StatelessWidget {
                             child: TimelineCard(
                           img: "images/timelinebg.png",
                           title: "Timeline",
-                          onClicked: () {},
+                          onClicked: () {
+                            Get.to(() => TimelinePage());
+                          },
                         )),
                         SizedBox(
                           width: 20,
@@ -103,67 +128,87 @@ class ToolsCard extends StatelessWidget {
                             child: AppointmentCard(
                           img: "images/appointmentsbg.png",
                           title: "Appointments",
-                          onClicked: () {},
+                          onClicked: () {
+                            Get.to(() => AppointmentsPage());
+                          },
                         )),
                       ],
                     ),
                     //SECOND ROW
                     Row(
                       children: [
+                        //ThIRD ITEM
                         Expanded(
                             child: QuestionsCard(
                           img: "images/questionsbg.png",
                           title: "Questions",
-                          onClicked: () {},
+                          onClicked: () {
+                            Get.to(() => QuestionsPage());
+                          },
                         )),
                         SizedBox(
                           width: 20,
                         ),
+                        //FOURTH ITEM
                         Expanded(
                             child: ShopCard(
                           img: "images/shopbg.png",
                           title: "Shop",
-                          onClicked: () {},
+                          onClicked: () {
+                            Get.to(()=>ShoppingCategories());
+                          },
                         )),
                       ],
                     ),
                     //THIRD ROW
                     Row(
                       children: [
+                        //FIVTH ITEM
                         Expanded(
                             child: KickcounterCard(
                           img: "images/kickcounterbg.webp",
                           title: "Kick Counter",
-                          onClicked: () {},
+                          onClicked: () {
+                            Get.to(() => KickCounterPage());
+                          },
                         )),
                         SizedBox(
                           width: 20,
                         ),
+                        //SIXTH ITEM
                         Expanded(
                             child: ContractionsCard(
                           img: "images/contractionsbg.webp",
                           title: "Contractions",
-                          onClicked: () {},
+                          onClicked: () {
+                            Get.to(() => ContractionTimer());
+                          },
                         )),
                       ],
                     ),
                     //FOURTH ROW
                     Row(
                       children: [
+                        //SEVENTH ITEM
                         Expanded(
                             child: BirthplanCard(
                           img: "images/birthplanbg.png",
                           title: "Birth Plan",
-                          onClicked: () {},
+                          onClicked: () {
+                            Get.to(() => BirthPlanPage());
+                          },
                         )),
                         SizedBox(
                           width: 20,
                         ),
+                        //EIGHTH ITEM
                         Expanded(
                             child: HospitalbagCard(
                           img: "images/hospitalbagbg.png",
                           title: "Hospital Bag",
-                          onClicked: () {},
+                          onClicked: () {
+                            Get.to(() => HospitalbagChecklist());
+                          },
                         )),
                       ],
                     ),

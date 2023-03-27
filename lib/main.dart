@@ -13,9 +13,10 @@ import 'package:pregnancy_helper/screens/welcome.dart';
 import 'package:pregnancy_helper/widgets/Tools_card.dart';
 import 'package:pregnancy_helper/widgets/timeline_card.dart';
 
-import 'screens/splash.dart';
 import 'controllers/main_bindings.dart';
 import 'firebase_options.dart';
+import '../screens/welcome.dart';
+
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -42,7 +43,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
           primarySwatch: Colors.blue,
            ),
-      home:const  SplashScreen(),
+      home:const  WelcomePage(),
+
     );
   }
 }

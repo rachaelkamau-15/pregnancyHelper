@@ -70,6 +70,7 @@ class WelcomePage extends StatelessWidget {
           
         ],
       ),
+      
     ),
     );
   }

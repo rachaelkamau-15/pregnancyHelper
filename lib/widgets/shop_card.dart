@@ -2,15 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ShopCard extends StatelessWidget {
-  const ShopCard({super.key,
-  required this.onClicked,
+  const ShopCard({
+    super.key,
+    required this.onClicked,
     required this.img,
-    required this.title,});
-    final VoidCallback onClicked;
+    required this.title,
+  });
+  final VoidCallback onClicked;
   final String img;
   final String title;
 
-  @override
+@override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onClicked,

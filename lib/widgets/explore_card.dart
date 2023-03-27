@@ -2,13 +2,15 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pregnancy_helper/widgets/progress_card.dart';
+import 'package:pregnancy_helper/controllers/auth_controller.dart';
 
-import 'community_card.dart';
-import 'exercises_card.dart';
-import 'fertility_card.dart';
-import 'medical_card.dart';
-import 'nutrition_card.dart';
+import 'package:pregnancy_helper/widgets/settings_card.dart';
+
+
+
+import '../controllers/main_controller.dart';
+import 'explorepage_card.dart';
+
 
 class ExploreCard extends StatelessWidget {
   const ExploreCard({super.key});
@@ -16,17 +18,31 @@ class ExploreCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      
       backgroundColor: Color.fromARGB(195, 71, 1, 83),
       appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back,
+        color:Colors.white),
+        onPressed: () {
+          Navigator.pop(context);
+        },
+        ),
         backgroundColor: Color.fromARGB(195, 71, 1, 83),
         actions: [
-          Container(
-            margin: EdgeInsets.only(
-              right: 25,
-            ),
-            child: CircleAvatar(
-              child: Text("RK"),
-              backgroundColor: Color.fromARGB(195, 71, 1, 83),
+          InkWell(
+            onTap:  () {
+              Get.to(() => SettingsCard());
+            },
+            child: Container(
+              margin: EdgeInsets.only(
+                right: 25,
+              ),
+              child: CircleAvatar(
+                child: Text("RK"),
+                backgroundColor: Color.fromARGB(195, 71, 1, 83),
+              ),
             ),
           ),
         ],
@@ -46,7 +62,7 @@ class ExploreCard extends StatelessWidget {
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: Colors.white,
-                  fontSize: 16,
+                  fontSize: 18,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -73,25 +89,22 @@ class ExploreCard extends StatelessWidget {
                 ],
               ),
               //FIRST HORIZONTAL SCROLL
-              Container(
-                height: 160,
-                width: Get.width,
-                padding: EdgeInsets.all(20),
-                child: ListView(
-                  scrollDirection: Axis.horizontal,
-                  
-                  children: [
-                    //CONTAINER WITH AN IMAGE AND TEXT
-                    ProgressCard(
-                        img: "images/trimester1bg.jpg", title: "Trimester One"),
-                    //CONTAINER WITH AN IMAGE AND TEXT
-                    ProgressCard(
-                        img: "images/trimester2bg.jpg", title: "Trimester Two"),
-                    //CONTAINER WITH AN IMAGE AND TEXT
-                    ProgressCard(
-                        img: "images/trimester3bg.jpg", title: "Trimester Three"),
-                  ],
-                ),
+              Obx(
+                (){
+                  return Container(
+                    height: 160,
+                    width: Get.width,
+                    padding: EdgeInsets.all(20),
+                    child: ListView(
+                      scrollDirection: Axis.horizontal,
+                      
+                      children:MainController.to.exploretrackyourprogress.entries.map((e) => ExplorePageCard(
+                            img: "${e.value["image"]}", title: "${e.value["title"]}"),).toList() 
+                        
+                      
+                    ),
+                  );
+                }
               ),
                SizedBox(
                 height: 5,
@@ -117,24 +130,22 @@ class ExploreCard extends StatelessWidget {
               ),
               
               //SECOND HORIZONTAL SCROLL
-              Container(
-                height: 160,
-                width: Get.width,
-                padding: EdgeInsets.all(20),
-                child: ListView(
-                  scrollDirection: Axis.horizontal,
-                  children: [
-                    //CONTAINER WITH AN IMAGE AND TEXT
-                    NutritionCard(
-                        img: "images/babybg.jpg", title: "Vitamin and Minerals"),
-                    //CONTAINER WITH AN IMAGE AND TEXT
-                    NutritionCard(
-                        img: "images/babybg.jpg", title: "Foods and Drinks"),
-                    //CONTAINER WITH AN IMAGE AND TEXT
-                    NutritionCard(
-                        img: "images/babybg.jpg", title: "Dos and Don'ts"),
-                  ],
-                ),
+               Obx(
+                (){
+                  return Container(
+                    height: 160,
+                    width: Get.width,
+                    padding: EdgeInsets.all(20),
+                    child: ListView(
+                      scrollDirection: Axis.horizontal,
+                      
+                      children:MainController.to.explorenutrition.entries.map((e) => ExplorePageCard(
+                            img: "${e.value["image"]}", title: "${e.value["title"]}"),).toList() 
+                        
+                      
+                    ),
+                  );
+                }
               ),
                SizedBox(
                 height: 5,
@@ -159,24 +170,22 @@ class ExploreCard extends StatelessWidget {
                 ],
               ),
               //THRID HORIZONTAL SCROLL
-              Container(
-                height: 160,
-                width: Get.width,
-                padding: EdgeInsets.all(20),
-                child: ListView(
-                  scrollDirection: Axis.horizontal,
-                  children: [
-                    //CONTAINER WITH AN IMAGE AND TEXT
-                    MedicalCard(
-                        img: "images/babybg.jpg", title: "Pregnancy and Conditions"),
-                    //CONTAINER WITH AN IMAGE AND TEXT
-                    MedicalCard(
-                        img: "images/babybg.jpg", title: "Tests and Scans"),
-                    //CONTAINER WITH AN IMAGE AND TEXT
-                    MedicalCard(
-                        img: "images/babybg.jpg", title: "Questions and Answers"),
-                  ],
-                ),
+              Obx(
+                (){
+                  return Container(
+                    height: 160,
+                    width: Get.width,
+                    padding: EdgeInsets.all(20),
+                    child: ListView(
+                      scrollDirection: Axis.horizontal,
+                      
+                      children:MainController.to.exploremedical.entries.map((e) => ExplorePageCard(
+                            img: "${e.value["image"]}", title: "${e.value["title"]}"),).toList() 
+                        
+                      
+                    ),
+                  );
+                }
               ),
               SizedBox(
                 height: 5,
@@ -202,24 +211,22 @@ class ExploreCard extends StatelessWidget {
               ),
               //FOURTH HORIZONTAL SCROLL
               
-              Container(
-                height: 200,
-                width: Get.width,
-                padding: EdgeInsets.all(20),
-                child: ListView(
-                  scrollDirection: Axis.horizontal,
-                  children: [
-                    //CONTAINER WITH AN IMAGE AND TEXT
-                    ExercisesCard(
-                        img: "images/exercise1bg.jpg", title: "Simple exercises you can do at home"),
-                    //CONTAINER WITH AN IMAGE AND TEXT
-                    ExercisesCard(
-                        img: "images/exercise2bg.jpg", title: "Benefits of exercising during pregnancy"),
-                    //CONTAINER WITH AN IMAGE AND TEXT
-                    ExercisesCard(
-                        img: "images/exercise3bg.jpg", title: "How to exercise while pregnant"),
-                  ],
-                ),
+               Obx(
+                (){
+                  return Container(
+                    height: 160,
+                    width: Get.width,
+                    padding: EdgeInsets.all(20),
+                    child: ListView(
+                      scrollDirection: Axis.horizontal,
+                      
+                      children:MainController.to.exploreexercises.entries.map((e) => ExplorePageCard(
+                            img: "${e.value["image"]}", title: "${e.value["title"]}"),).toList() 
+                        
+                      
+                    ),
+                  );
+                }
               ),
               SizedBox(
                 height: 5,
@@ -245,24 +252,22 @@ class ExploreCard extends StatelessWidget {
                 ],
               ),
               //FIVTH HORIZONTAL SCROLL
-              Container(
-                height: 180,
-                width: Get.width,
-                padding: EdgeInsets.all(20),
-                child: ListView(
-                  scrollDirection: Axis.horizontal,
-                  children: [
-                    //CONTAINER WITH AN IMAGE AND TEXT
-                    FertilityCard(
-                        img: "images/babybg.jpg", title: "Considering getting pregnant?"),
-                    //CONTAINER WITH AN IMAGE AND TEXT
-                    FertilityCard(
-                        img: "images/babybg.jpg", title: "Track your fertility"),
-                    //CONTAINER WITH AN IMAGE AND TEXT
-                    FertilityCard(
-                        img: "images/babybg.jpg", title: "Best diet  for fertility"),
-                  ],
-                ),
+              Obx(
+                (){
+                  return Container(
+                    height: 160,
+                    width: Get.width,
+                    padding: EdgeInsets.all(20),
+                    child: ListView(
+                      scrollDirection: Axis.horizontal,
+                      
+                      children:MainController.to.explorefertility.entries.map((e) => ExplorePageCard(
+                            img: "${e.value["image"]}", title: "${e.value["title"]}"),).toList() 
+                        
+                      
+                    ),
+                  );
+                }
               ),
               SizedBox(
                 height: 5,
@@ -288,24 +293,22 @@ class ExploreCard extends StatelessWidget {
                 ],
               ),
               //SIXTH HORIZONTAL SCROLL
-              Container(
-                height: 160,
-                width: Get.width,
-                padding: EdgeInsets.all(20),
-                child: ListView(
-                  scrollDirection: Axis.horizontal,
-                  children: [
-                    //CONTAINER WITH AN IMAGE AND TEXT
-                    CommunityCard(
-                        img: "images/communityinfobg.jpg", title: "Information"),
-                    //CONTAINER WITH AN IMAGE AND TEXT
-                    CommunityCard(
-                        img: "images/supportbg.jpg", title: "Support"),
-                    //CONTAINER WITH AN IMAGE AND TEXT
-                    CommunityCard(
-                        img: "images/babybg.jpg", title: "Activities"),
-                  ],
-                ),
+              Obx(
+                (){
+                  return Container(
+                    height: 160,
+                    width: Get.width,
+                    padding: EdgeInsets.all(20),
+                    child: ListView(
+                      scrollDirection: Axis.horizontal,
+                      
+                      children:MainController.to.explorecommunityforums.entries.map((e) => ExplorePageCard(
+                            img: "${e.value["image"]}", title: "${e.value["title"]}"),).toList() 
+                        
+                      
+                    ),
+                  );
+                }
               ),
             ],
           ),

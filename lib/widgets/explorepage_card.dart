@@ -1,9 +1,8 @@
-
 import 'package:flutter/material.dart';
 
-class NutritionCard extends StatelessWidget {
-  const NutritionCard({super.key, required this.img, required this.title});
-  final String img,title;
+class ExplorePageCard extends StatelessWidget {
+  const ExplorePageCard({super.key, required this.img, required this.title});
+  final String img, title;
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +15,7 @@ class NutritionCard extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Image.asset(
+          Image.network(
             img,
             width: 70,
             height: 70,
@@ -34,5 +33,6 @@ class NutritionCard extends StatelessWidget {
         ],
       ),
     );
+    
   }
-}
+  }
