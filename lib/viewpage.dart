@@ -17,7 +17,7 @@ class _ViewPageState extends State<ViewPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Page View"),
+        title: const Text("General Information"),
         centerTitle: true,
         backgroundColor: Color.fromARGB(195, 71, 1, 83),
         actions: [
