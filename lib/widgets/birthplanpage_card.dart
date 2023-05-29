@@ -1,10 +1,112 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 import 'settings_card.dart';
 
-class BirthPlanPage extends StatelessWidget {
+class BirthPlanPage extends StatefulWidget {
   const BirthPlanPage({super.key});
+
+  @override
+  State<BirthPlanPage> createState() => _BirthPlanPageState();
+}
+
+class _BirthPlanPageState extends State<BirthPlanPage> {
+  var _items = {};
+
+  Box box = Hive.box("pregnancyHelper");
+  Widget _itemWidget(key, content) {
+    return InkWell(
+      onTap: () {
+        content["selected"] = !content["selected"];
+        setState(() {
+          var newItems = Map.of(_items);
+          newItems[key] = content;
+          _items = newItems;
+        });
+        box.put("birthplan", Map.of(_items));
+      },
+      child: Container(
+        width: Get.width,
+        margin: EdgeInsets.only(bottom: 5),
+        child: Row(
+          children: [
+            content['selected']
+                ? Icon(Icons.check_box_outlined,
+                    color: Color.fromARGB(195, 71, 1, 83))
+                : Icon(
+                    Icons.check_box_outline_blank,
+                  ),
+            SizedBox(
+              width: 8,
+            ),
+            Expanded(
+              child: Text(
+                "${content['title']}",
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  @override
+  void initState() {
+    //var box = Hive.box("pregnancyHelper");
+
+    _items = box.get("birthplan",
+        defaultValue: [
+          {"selected": false, "title": "Full name"},
+          {"selected": false, "title": "Partner's name"},
+          {"selected": false, "title": "Doctor's name"},
+          {"selected": false, "title": "Hospital name"},
+          {"selected": false, "title": "Vaginal"},
+          {"selected": false, "title": "C-section"},
+          {"selected": false, "title": "Water birth"},
+          {"selected": false, "title": "Minimum interruptions"},
+          {"selected": false, "title": "Minimum vaginal examinations"},
+          {
+            "selected": false,
+            "title": "Hospital staff limited to my own\ndoctor and nurses"
+          },
+          {"selected": false, "title": "My Partner to be present "},
+          {"selected": false, "title": "Continuos"},
+          {"selected": false, "title": "Intermittent"},
+          {"selected": false, "title": "Internal"},
+          {"selected": false, "title": "External"},
+          {"selected": false, "title": "Push spontaneously"},
+          {"selected": false, "title": "Push as directed"},
+          {"selected": false, "title": "A second opinion"},
+          {
+            "selected": false,
+            "title": "My partner to remain with me\nthe entire time"
+          },
+          {"selected": false, "title": "Immediately after delivery"},
+          {"selected": false, "title": "After suctioning"},
+          {"selected": false, "title": "After weighing"},
+          {"selected": false, "title": "After being wiped clean\nand swaddled"},
+          {
+            "selected": false,
+            "title": "To join me and baby\nimmediately after deliverye"
+          },
+          {
+            "selected": false,
+            "title": "To join me and baby\nin the room later"
+          },
+          {"selected": false, "title": "To have unlimited visits\nafter birth"},
+          {"selected": false, "title": "Given in my presence"},
+          {"selected": false, "title": "Given in my partner's presence"},
+          {"selected": false, "title": "In my presence"},
+          {"selected": false, "title": "In my partner's presence"},
+          {"selected": false, "title": "By me"},
+          {"selected": false, "title": "By my partner"},
+          {"selected": false, "title": "As long as possible"},
+          {"selected": false, "title": "As briefly as possible"},
+        ].asMap());
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +120,7 @@ class BirthPlanPage extends StatelessWidget {
         ),
         elevation: 1,
         title: Text(
-          "Birth Plan",
+          "Birth Plan CheckList",
           style: TextStyle(color: Colors.white),
         ),
         backgroundColor: Color.fromARGB(195, 71, 1, 83),
@@ -46,69 +148,11 @@ class BirthPlanPage extends StatelessWidget {
             SizedBox(
               height: 10,
             ),
-            Row(
-              children: [
-                Icon(Icons.check_box_outline_blank),
-                SizedBox(
-                  width: 8,
-                ),
-                Text(
-                  "Full name",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                ),
-                SizedBox(
-                  height: 5,
-                ),
-              ],
-            ),
-            Row(
-              children: [
-                Icon(
-                  Icons.check_box_outline_blank,
-                ),
-                SizedBox(
-                  width: 8,
-                ),
-                Text(
-                  "Partner's name",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 5,
-            ),
-            Row(
-              children: [
-                Icon(
-                  Icons.check_box_outline_blank,
-                ),
-                SizedBox(
-                  width: 8,
-                ),
-                Text(
-                  "Doctor's name",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 5,
-            ),
-            Row(
-              children: [
-                Icon(
-                  Icons.check_box_outline_blank,
-                ),
-                SizedBox(
-                  width: 8,
-                ),
-                Text(
-                  "Hospital name",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
+            ..._items.keys.toList().sublist(0, 4).map(
+              (e) {
+                return _itemWidget(e, _items[e]);
+              },
+            ).toList(),
             Divider(
               height: 10,
               thickness: 1,
@@ -123,52 +167,11 @@ class BirthPlanPage extends StatelessWidget {
             SizedBox(
               height: 10,
             ),
-            Row(
-              children: [
-                Icon(Icons.check_box_outline_blank),
-                SizedBox(
-                  width: 8,
-                ),
-                Text(
-                  "Vaginal",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                ),
-                SizedBox(
-                  height: 5,
-                ),
-              ],
-            ),
-            Row(
-              children: [
-                Icon(
-                  Icons.check_box_outline_blank,
-                ),
-                SizedBox(
-                  width: 8,
-                ),
-                Text(
-                  "C-section",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 5,
-            ),
-            Row(
-              children: [
-                Icon(
-                  Icons.check_box_outline_blank,
-                ),
-                SizedBox(
-                  width: 8,
-                ),
-                Text(
-                  "Water birth",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
+            ...(_items.keys.toList()).sublist(4, 7).map(
+              (e) {
+                return _itemWidget(e, _items[e]);
+              },
+            ).toList(),
             Divider(
               height: 10,
               thickness: 1,
@@ -183,69 +186,11 @@ class BirthPlanPage extends StatelessWidget {
             SizedBox(
               height: 10,
             ),
-            Row(
-              children: [
-                Icon(Icons.check_box_outline_blank),
-                SizedBox(
-                  width: 8,
-                ),
-                Text(
-                  "Minimum interruptions",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                ),
-                SizedBox(
-                  height: 5,
-                ),
-              ],
-            ),
-            Row(
-              children: [
-                Icon(
-                  Icons.check_box_outline_blank,
-                ),
-                SizedBox(
-                  width: 8,
-                ),
-                Text(
-                  "Minimum vaginal examinations",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 5,
-            ),
-            Row(
-              children: [
-                Icon(
-                  Icons.check_box_outline_blank,
-                ),
-                SizedBox(
-                  width: 8,
-                ),
-                Text(
-                  "Hospital staff limited to my own\ndoctor and nurses",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 5,
-            ),
-            Row(
-              children: [
-                Icon(
-                  Icons.check_box_outline_blank,
-                ),
-                SizedBox(
-                  width: 8,
-                ),
-                Text(
-                  "My Partner to be present ",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
+            ..._items.keys.toList().sublist(7, 11).map(
+              (e) {
+                return _itemWidget(e, _items[e]);
+              },
+            ).toList(),
             Divider(
               height: 10,
               thickness: 1,
@@ -260,69 +205,11 @@ class BirthPlanPage extends StatelessWidget {
             SizedBox(
               height: 10,
             ),
-            Row(
-              children: [
-                Icon(Icons.check_box_outline_blank),
-                SizedBox(
-                  width: 8,
-                ),
-                Text(
-                  "Continuos",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                ),
-                SizedBox(
-                  height: 5,
-                ),
-              ],
-            ),
-            Row(
-              children: [
-                Icon(
-                  Icons.check_box_outline_blank,
-                ),
-                SizedBox(
-                  width: 8,
-                ),
-                Text(
-                  "Intermittent",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 5,
-            ),
-            Row(
-              children: [
-                Icon(
-                  Icons.check_box_outline_blank,
-                ),
-                SizedBox(
-                  width: 8,
-                ),
-                Text(
-                  "Internal",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 5,
-            ),
-            Row(
-              children: [
-                Icon(
-                  Icons.check_box_outline_blank,
-                ),
-                SizedBox(
-                  width: 8,
-                ),
-                Text(
-                  "External",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
+            ..._items.keys.toList().sublist(11, 15).map(
+              (e) {
+                return _itemWidget(e, _items[e]);
+              },
+            ).toList(),
             Divider(
               height: 10,
               thickness: 1,
@@ -337,35 +224,11 @@ class BirthPlanPage extends StatelessWidget {
             SizedBox(
               height: 10,
             ),
-            Row(
-              children: [
-                Icon(Icons.check_box_outline_blank),
-                SizedBox(
-                  width: 8,
-                ),
-                Text(
-                  "Push spontaneously",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                ),
-                SizedBox(
-                  height: 5,
-                ),
-              ],
-            ),
-            Row(
-              children: [
-                Icon(
-                  Icons.check_box_outline_blank,
-                ),
-                SizedBox(
-                  width: 8,
-                ),
-                Text(
-                  "Push as directed",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
+            ..._items.keys.toList().sublist(15, 17).map(
+              (e) {
+                return _itemWidget(e, _items[e]);
+              },
+            ).toList(),
             Divider(
               height: 10,
               thickness: 1,
@@ -380,35 +243,11 @@ class BirthPlanPage extends StatelessWidget {
             SizedBox(
               height: 10,
             ),
-            Row(
-              children: [
-                Icon(Icons.check_box_outline_blank),
-                SizedBox(
-                  width: 8,
-                ),
-                Text(
-                  "A second opinion",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                ),
-                SizedBox(
-                  height: 5,
-                ),
-              ],
-            ),
-            Row(
-              children: [
-                Icon(
-                  Icons.check_box_outline_blank,
-                ),
-                SizedBox(
-                  width: 8,
-                ),
-                Text(
-                  "My partner to remain with me\nthe entire time",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
+            ..._items.keys.toList().sublist(17, 19).map(
+              (e) {
+                return _itemWidget(e, _items[e]);
+              },
+            ).toList(),
             Divider(
               height: 10,
               thickness: 1,
@@ -423,69 +262,11 @@ class BirthPlanPage extends StatelessWidget {
             SizedBox(
               height: 10,
             ),
-            Row(
-              children: [
-                Icon(Icons.check_box_outline_blank),
-                SizedBox(
-                  width: 8,
-                ),
-                Text(
-                  "Immediately after delivery",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                ),
-                SizedBox(
-                  height: 5,
-                ),
-              ],
-            ),
-            Row(
-              children: [
-                Icon(
-                  Icons.check_box_outline_blank,
-                ),
-                SizedBox(
-                  width: 8,
-                ),
-                Text(
-                  "After suctioning",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 5,
-            ),
-            Row(
-              children: [
-                Icon(
-                  Icons.check_box_outline_blank,
-                ),
-                SizedBox(
-                  width: 8,
-                ),
-                Text(
-                  "After weighing",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 5,
-            ),
-            Row(
-              children: [
-                Icon(
-                  Icons.check_box_outline_blank,
-                ),
-                SizedBox(
-                  width: 8,
-                ),
-                Text(
-                  "After being wiped clean\nand swaddled",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
+            ..._items.keys.toList().sublist(19, 23).map(
+              (e) {
+                return _itemWidget(e, _items[e]);
+              },
+            ).toList(),
             Divider(
               height: 10,
               thickness: 1,
@@ -500,52 +281,11 @@ class BirthPlanPage extends StatelessWidget {
             SizedBox(
               height: 10,
             ),
-            Row(
-              children: [
-                Icon(Icons.check_box_outline_blank),
-                SizedBox(
-                  width: 8,
-                ),
-                Text(
-                  "To join me and baby\nimmediately after delivery",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                ),
-                SizedBox(
-                  height: 5,
-                ),
-              ],
-            ),
-            Row(
-              children: [
-                Icon(
-                  Icons.check_box_outline_blank,
-                ),
-                SizedBox(
-                  width: 8,
-                ),
-                Text(
-                  "To join me and baby\nin the room later",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 5,
-            ),
-            Row(
-              children: [
-                Icon(
-                  Icons.check_box_outline_blank,
-                ),
-                SizedBox(
-                  width: 8,
-                ),
-                Text(
-                  "To have unlimited visits\nafter birth",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
+            ..._items.keys.toList().sublist(23, 26).map(
+              (e) {
+                return _itemWidget(e, _items[e]);
+              },
+            ).toList(),
             Divider(
               height: 10,
               thickness: 1,
@@ -560,35 +300,11 @@ class BirthPlanPage extends StatelessWidget {
             SizedBox(
               height: 10,
             ),
-            Row(
-              children: [
-                Icon(Icons.check_box_outline_blank),
-                SizedBox(
-                  width: 8,
-                ),
-                Text(
-                  "Given in my presence",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                ),
-                SizedBox(
-                  height: 5,
-                ),
-              ],
-            ),
-            Row(
-              children: [
-                Icon(
-                  Icons.check_box_outline_blank,
-                ),
-                SizedBox(
-                  width: 8,
-                ),
-                Text(
-                  "Given in my partner's presence",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
+            ..._items.keys.toList().sublist(26, 28).map(
+              (e) {
+                return _itemWidget(e, _items[e]);
+              },
+            ).toList(),
             Divider(
               height: 10,
               thickness: 1,
@@ -603,69 +319,11 @@ class BirthPlanPage extends StatelessWidget {
             SizedBox(
               height: 10,
             ),
-            Row(
-              children: [
-                Icon(Icons.check_box_outline_blank),
-                SizedBox(
-                  width: 8,
-                ),
-                Text(
-                  "In my presence",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                ),
-                SizedBox(
-                  height: 5,
-                ),
-              ],
-            ),
-            Row(
-              children: [
-                Icon(
-                  Icons.check_box_outline_blank,
-                ),
-                SizedBox(
-                  width: 8,
-                ),
-                Text(
-                  "In my partner's presence",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 5,
-            ),
-            Row(
-              children: [
-                Icon(
-                  Icons.check_box_outline_blank,
-                ),
-                SizedBox(
-                  width: 8,
-                ),
-                Text(
-                  "By me",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 5,
-            ),
-            Row(
-              children: [
-                Icon(
-                  Icons.check_box_outline_blank,
-                ),
-                SizedBox(
-                  width: 8,
-                ),
-                Text(
-                  "By my partner",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
+            ..._items.keys.toList().sublist(28, 32).map(
+              (e) {
+                return _itemWidget(e, _items[e]);
+              },
+            ).toList(),
             Divider(
               height: 10,
               thickness: 1,
@@ -680,35 +338,11 @@ class BirthPlanPage extends StatelessWidget {
             SizedBox(
               height: 10,
             ),
-            Row(
-              children: [
-                Icon(Icons.check_box_outline_blank),
-                SizedBox(
-                  width: 8,
-                ),
-                Text(
-                  "As long as possible",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                ),
-                SizedBox(
-                  height: 5,
-                ),
-              ],
-            ),
-            Row(
-              children: [
-                Icon(
-                  Icons.check_box_outline_blank,
-                ),
-                SizedBox(
-                  width: 8,
-                ),
-                Text(
-                  "As briefly as possible",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
+            ..._items.keys.toList().sublist(32, 34).map(
+              (e) {
+                return _itemWidget(e, _items[e]);
+              },
+            ).toList(),
             Divider(
               height: 10,
               thickness: 1,

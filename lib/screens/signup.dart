@@ -164,10 +164,10 @@ class _SignUpState extends State<SignUp> {
                                     _nameController.text.trim().isEmpty) {
                                   Utils.showError("No field should be empty!");
                                 } else {
-                                  AuthController.to.register(
+                                  await AuthController.to.register(
                                     _emailController.text.trim(),
                                     _passwordController.text.trim(),
-                                    _nameController.text.trim(),
+                                    "${_nameController.text.trim()} ${_lastNameController.text.trim()}",
                                     "",
                                     "",
                                     "",
