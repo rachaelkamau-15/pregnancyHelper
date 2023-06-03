@@ -11,6 +11,12 @@ class DeleteAccount extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () {
+            Get.back();
+          },
+        ),
         elevation: 1,
         title: Text(
           "Delete my account",
@@ -18,15 +24,14 @@ class DeleteAccount extends StatelessWidget {
         ),
         backgroundColor: Color.fromARGB(195, 71, 1, 83),
         actions: [
-          IconButton(
-            icon: Icon(Icons.settings, color: Colors.white),
-            onPressed: () {
-              Get.to(() => SettingsCard());
-            },
-          ),
+          // IconButton(
+          //   icon: Icon(Icons.settings, color: Colors.white),
+          //   onPressed: () {
+          //     Get.to(() => SettingsCard());
+          //   },
+          // ),
         ],
       ),
-      
       body: Container(
         child: ListView(
           children: [
@@ -44,7 +49,8 @@ class DeleteAccount extends StatelessWidget {
                   backgroundColor: Color.fromARGB(195, 71, 1, 83),
                 ),
                 onPressed: () async {
-                 await AuthController.to.signOut();
+                  //Delete Account
+                  await AuthController.to.deleteUser();
                 },
                 child: Text(
                   "Permanently Delete ",
@@ -72,7 +78,6 @@ class DeleteAccount extends StatelessWidget {
                 ),
               ),
             ),
-           
           ],
         ),
       ),

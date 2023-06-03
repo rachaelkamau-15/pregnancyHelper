@@ -1,10 +1,9 @@
-
-import 'dart:js';
-
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:intl/intl.dart';
 import 'package:pregnancy_helper/screens/dashboard.dart';
 import 'package:pregnancy_helper/screens/login.dart';
 import 'package:pregnancy_helper/screens/signup.dart';
@@ -17,16 +16,20 @@ import 'controllers/main_bindings.dart';
 import 'firebase_options.dart';
 import '../screens/welcome.dart';
 
-
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  
+  Intl.defaultLocale = 'en_US';
+
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+  await Hive.initFlutter("pregnancy_helper");
+  await Hive.openBox('pregnancyHelper');
+
   runApp(const MyApp());
 }
-    
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -37,20 +40,12 @@ class MyApp extends StatelessWidget {
       initialBinding: MainBinding(),
       debugShowCheckedModeBanner: false,
       navigatorObservers: [FlutterSmartDialog.observer],
- builder: FlutterSmartDialog.init(),
-
+      builder: FlutterSmartDialog.init(),
       title: 'Flutter Demo',
       theme: ThemeData(
-          primarySwatch: Colors.blue,
-           ),
-      home:const  WelcomePage(),
-
+        primarySwatch: Colors.blue,
+      ),
+      home: const WelcomePage(),
     );
   }
 }
-
-  
-
-        
-
- 

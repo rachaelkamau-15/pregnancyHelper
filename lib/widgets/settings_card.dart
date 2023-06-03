@@ -1,4 +1,3 @@
-import 'dart:js_util';
 import 'dart:math';
 import 'dart:ui';
 
@@ -13,8 +12,18 @@ import 'package:pregnancy_helper/widgets/resetaccount_card.dart';
 
 import '../controllers/auth_controller.dart';
 
-class SettingsCard extends StatelessWidget {
+class SettingsCard extends StatefulWidget {
   const SettingsCard({super.key});
+
+  @override
+  State<SettingsCard> createState() => _SettingsCardState();
+}
+
+class _SettingsCardState extends State<SettingsCard> {
+  final TextEditingController _nameController = TextEditingController();
+
+  final TextEditingController _lastNameController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -23,12 +32,10 @@ class SettingsCard extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: Icon(
-            Icons.arrow_back,
-        color:Colors.white),
-        onPressed: () {
-          Navigator.pop(context);
-        },
+          icon: Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () {
+            Navigator.pop(context);
+          },
         ),
         title: Text("Settings"),
         backgroundColor: Color.fromARGB(195, 71, 1, 83),
@@ -46,10 +53,9 @@ class SettingsCard extends StatelessWidget {
           ),
         ],
       ),
-      body: 
-      Container(
+      body: Container(
         padding: EdgeInsets.only(left: 16, top: 25, right: 16),
-        color:Color.fromARGB(255, 234, 162, 247),
+        color: Color.fromARGB(255, 234, 162, 247),
         child: GestureDetector(
           onTap: () {
             FocusScope.of(context).unfocus();
@@ -63,7 +69,6 @@ class SettingsCard extends StatelessWidget {
                 Text(
                   "Account",
                   style: TextStyle(
-                     
                       fontSize: 20,
                       color: Color.fromARGB(195, 71, 1, 83),
                       fontWeight: FontWeight.bold),
@@ -78,6 +83,7 @@ class SettingsCard extends StatelessWidget {
               height: 5,
             ),
             TextField(
+              controller: _nameController,
               decoration: InputDecoration(
                 contentPadding: EdgeInsets.only(bottom: 3),
                 labelText: "First Name",
@@ -94,6 +100,7 @@ class SettingsCard extends StatelessWidget {
               height: 5,
             ),
             TextField(
+              controller: _lastNameController,
               decoration: InputDecoration(
                   contentPadding: EdgeInsets.only(bottom: 3),
                   labelText: "Last Name",
@@ -107,21 +114,22 @@ class SettingsCard extends StatelessWidget {
             SizedBox(
               height: 5,
             ),
+            // TextField(
+            //   decoration: InputDecoration(
+            //       contentPadding: EdgeInsets.only(bottom: 3),
+            //       labelText: "Email",
+            //       floatingLabelBehavior: FloatingLabelBehavior.always,
+            //       filled: true,
+            //       hintStyle: TextStyle(
+            //           fontSize: 16,
+            //           fontWeight: FontWeight.bold,
+            //           color: Colors.white)),
+            // ),
+            // SizedBox(
+            //   height: 5,
+            // ),
             TextField(
-              decoration: InputDecoration(
-                  contentPadding: EdgeInsets.only(bottom: 3),
-                  labelText: "Email",
-                  floatingLabelBehavior: FloatingLabelBehavior.always,
-                  filled: true,
-                  hintStyle: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white)),
-            ),
-            SizedBox(
-              height: 5,
-            ),
-            TextField(
+              controller: _passwordController,
               obscureText: true,
               decoration: InputDecoration(
                 contentPadding: EdgeInsets.only(bottom: 3),
@@ -145,7 +153,14 @@ class SettingsCard extends StatelessWidget {
                       borderRadius: BorderRadius.circular(20)),
                   backgroundColor: Color.fromARGB(195, 71, 1, 83),
                 ),
-                onPressed: () {},
+                onPressed: () async {
+                  if (await AuthController.to.updateUserProfile(
+                      "${_nameController.text.trim()} ${_lastNameController.text.trim()}",
+                      _passwordController.text,
+                      false)) {
+                    Get.close(1);
+                  }
+                },
                 child: Text(
                   "Save",
                   style: TextStyle(fontSize: 15, color: Colors.white70),
@@ -163,11 +178,16 @@ class SettingsCard extends StatelessWidget {
                       borderRadius: BorderRadius.circular(50)),
                   backgroundColor: Color.fromARGB(195, 71, 1, 83),
                 ),
-                onPressed: () {
-                  Get.to(() => ChangePassword());
+                onPressed: () async {
+                  if (await AuthController.to.updateUserProfile(
+                      "${_nameController.text.trim()} ${_lastNameController.text.trim()}",
+                      _passwordController.text,
+                      true)) {
+                    Get.close(1);
+                  }
                 },
                 child: Text(
-                  "Change Password",
+                  "Save and Change Password",
                   style: TextStyle(fontSize: 15, color: Colors.white70),
                 ),
               ),
@@ -175,12 +195,54 @@ class SettingsCard extends StatelessWidget {
             SizedBox(
               height: 30,
             ),
+            // Row(
+            //   children: [
+            //     Text(
+            //       "Notifications",
+            //       style: TextStyle(
+            //           fontSize: 20,
+            //           color: Color.fromARGB(195, 71, 1, 83),
+            //           fontWeight: FontWeight.bold),
+            //     ),
+            //   ],
+            // ),
+            // Divider(
+            //   height: 10,
+            //   thickness: 1,
+            // ),
+            // SizedBox(
+            //   height: 10,
+            // ),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //   children: [
+            //     Text(
+            //       "Email Settings",
+            //       style: TextStyle(
+            //         color: Color.fromARGB(195, 71, 1, 83),
+            //         fontWeight: FontWeight.bold,
+            //         fontSize: 18,
+            //       ),
+            //     ),
+            //     Transform.scale(
+            //       scale: 0.7,
+            //       child: CupertinoSwitch(
+            //         activeColor: Color.fromARGB(195, 71, 1, 83),
+            //         trackColor: Colors.white,
+            //         value: true,
+            //         onChanged: (bool val) {},
+            //       ),
+            //     ),
+            //   ],
+            // ),
+            // SizedBox(
+            //   height: 20,
+            // ),
             Row(
               children: [
                 Text(
-                  "Notifications",
+                  "Data",
                   style: TextStyle(
-                      
                       fontSize: 20,
                       color: Color.fromARGB(195, 71, 1, 83),
                       fontWeight: FontWeight.bold),
@@ -194,64 +256,23 @@ class SettingsCard extends StatelessWidget {
             SizedBox(
               height: 10,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "Email Settings",
-                  style: TextStyle(
-                    color:Color.fromARGB(195, 71, 1, 83),
-                    fontWeight:FontWeight.bold,
-                    fontSize: 18,
-                    
-                  ),
-                ),
-                Transform.scale(
-                  scale: 0.7,
-                  child: CupertinoSwitch(
-                    activeColor:Color.fromARGB(195, 71, 1, 83),
-                    trackColor:Colors.white,
-                    value: true,
-                    onChanged: (bool val) {},
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Row(
-              children: [
-                Text(
-                  "Data",
-                  style: TextStyle(fontSize: 20, color:Color.fromARGB(195, 71, 1, 83),fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
-            Divider(
-              height: 10,
-              thickness: 1,
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Center(
-              child: OutlinedButton(
-                style: OutlinedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(horizontal: 80),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20)),
-                  backgroundColor: Color.fromARGB(195, 71, 1, 83),
-                ),
-                onPressed: () {
-                   Get.to(() => ExportData());
-                },
-                child: Text(
-                  "Export Data",
-                  style: TextStyle(fontSize: 15, color: Colors.white70),
-                ),
-              ),
-            ),
+            // Center(
+            //   child: OutlinedButton(
+            //     style: OutlinedButton.styleFrom(
+            //       padding: const EdgeInsets.symmetric(horizontal: 80),
+            //       shape: RoundedRectangleBorder(
+            //           borderRadius: BorderRadius.circular(20)),
+            //       backgroundColor: Color.fromARGB(195, 71, 1, 83),
+            //     ),
+            //     onPressed: () {
+            //       Get.to(() => ExportData());
+            //     },
+            //     child: Text(
+            //       "Export Data",
+            //       style: TextStyle(fontSize: 15, color: Colors.white70),
+            //     ),
+            //   ),
+            // ),
             SizedBox(
               height: 20,
             ),
@@ -292,8 +313,7 @@ class SettingsCard extends StatelessWidget {
                 ),
               ),
             ),
-          ]
-          ),
+          ]),
         ),
       ),
     );

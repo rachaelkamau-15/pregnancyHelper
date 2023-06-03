@@ -10,7 +10,6 @@ import '../screens/signup.dart';
 import '../screens/welcome.dart';
 import 'main_controller.dart';
 
-
 class AuthController extends GetxController {
   static AuthController get to => Get.find();
   late Rx<User?> firebaseUser;
@@ -49,37 +48,38 @@ class AuthController extends GetxController {
       firebaseUserData.value.addAll(
           fsUser.data() == null ? {} : fsUser.data() as Map<String, dynamic>);
       update();
-      isNewUser.value = firebaseUserData.value ["isNewUser"]??true;
+      isNewUser.value = firebaseUserData.value["isNewUser"] ?? true;
       update();
       Get.offAll(() => Dashboard());
       Utils.dismissLoader();
       // REACTIVE LIST
 
-MainController.to.activities.bindStream(MainController.to.activitiesStream());
+      MainController.to.activities
+          .bindStream(MainController.to.activitiesStream());
     }
   }
-  isOldUser(){
-    isNewUser.value =false;
+
+  isOldUser() {
+    isNewUser.value = false;
     update();
   }
 
-
   Future<bool> register(
-      String email, 
-      String password, 
-      String name,
-      String? gestationalAge,
-      String? conceptionAge,
-      String? dueDate,
-      String? estimatedDueDate,
-      String? lmp,
-      String? cycleLength,
-      String? edd,
-      ) async {
+    String email,
+    String password,
+    String name,
+    String? gestationalAge,
+    String? conceptionAge,
+    String? dueDate,
+    String? estimatedDueDate,
+    String? lmp,
+    String? cycleLength,
+    String? edd,
+  ) async {
     Utils.showLoading(message: "Creating account…");
     try {
-      await auth.createUserWithEmailAndPassword(
-          email: email, password: password);
+      await (auth as FirebaseAuth)
+          .createUserWithEmailAndPassword(email: email, password: password);
       var user = auth.currentUser;
       if (user != null) {
         var fsUser = await users.doc(user.uid).get();
@@ -87,9 +87,18 @@ MainController.to.activities.bindStream(MainController.to.activitiesStream());
         if (!fsUser.exists) {
           isNewUser.value = true;
           update();
-          await users
-              .doc(user.uid)
-              .set({"name": "$name","email": "$email", "gestationalAge": "$gestationalAge", "conceptionAge": "$conceptionAge", "dueDate": "$dueDate", "estimatedDueDate": "$estimatedDueDate", "lmp": "$lmp", "cycleLenth": "$cycleLength", "edd": "$edd", "isNewUser":true});
+          await users.doc(user.uid).set({
+            "name": "$name",
+            "email": "$email",
+            "gestationalAge": "$gestationalAge",
+            "conceptionAge": "$conceptionAge",
+            "dueDate": "$dueDate",
+            "estimatedDueDate": "$estimatedDueDate",
+            "lmp": "$lmp",
+            "cycleLenth": "$cycleLength",
+            "edd": "$edd",
+            "isNewUser": true
+          });
         }
         Utils.showSuccess("Signup Successful!");
         Utils.dismissLoader();
@@ -102,6 +111,7 @@ MainController.to.activities.bindStream(MainController.to.activitiesStream());
         return false;
       }
     } catch (firebaseAuthException) {
+      print((firebaseAuthException as FirebaseAuthException).message);
       Utils.showError("Signup Failed!");
       Utils.dismissLoader();
       return false;
@@ -135,10 +145,102 @@ MainController.to.activities.bindStream(MainController.to.activitiesStream());
     await auth.signOut();
     Utils.dismissLoader();
   }
+
   Future deleteUser() async {
     Utils.showLoading(message: "Deleting Account…");
+    try {
+      await (auth as FirebaseAuth).currentUser?.delete();
 
-    await (auth as FirebaseAuth).currentUser?.delete();
-    Utils.dismissLoader();
+      Utils.dismissLoader();
+      Utils.showSuccess("Account Deleted Successful!");
+    } catch (e) {
+      Utils.dismissLoader();
+      Utils.showError("You need to login afresh to delete account");
+      await signOut();
+    }
+  }
+
+  Future<bool> updateUserData(String? gestationalAge, String? conceptionAge,
+      String? estimatedDueDate, String? lmp, String? cycleLength, String? edd,
+      {userIsNew = false}) async {
+    Utils.showLoading(message: "Updating Account…");
+    try {
+      var user = auth.currentUser;
+      if (user != null) {
+        var fsUser = await users.doc(user.uid).get();
+
+        //if (!fsUser.exists) {
+        isNewUser.value = true;
+        update();
+        await users.doc(user.uid).update({
+          "gestationalAge": "$gestationalAge",
+          "conceptionAge": "$conceptionAge",
+          "estimatedDueDate": "$estimatedDueDate",
+          "lmp": "$lmp",
+          "cycleLenth": "$cycleLength",
+          "edd": "$edd",
+          "isNewUser": userIsNew
+        });
+        // var fsUser = await users.doc(user.uid).get();
+        firebaseUserData.value.addAll(
+            fsUser.data() == null ? {} : fsUser.data() as Map<String, dynamic>);
+
+        ///}
+        Utils.showSuccess("Update Successful!");
+        Utils.dismissLoader();
+
+        return true;
+      } else {
+        Utils.showError("Update Failed!");
+        Utils.dismissLoader();
+
+        return false;
+      }
+    } catch (firebaseAuthException) {
+      print((firebaseAuthException as FirebaseAuthException).message);
+      Utils.showError("Signup Failed!");
+      Utils.dismissLoader();
+      return false;
+    }
+  }
+
+  Future<bool> updateUserProfile(
+      String name, String password, bool savePassword) async {
+    Utils.showLoading(message: "Updating Account…");
+    try {
+      var user = auth.currentUser;
+      if (user != null) {
+        if (password != "" && savePassword) {
+          await (user as User).updatePassword(password);
+        }
+        var fsUser = await users.doc(user.uid).get();
+
+        //if (!fsUser.exists) {
+        isNewUser.value = true;
+        update();
+        await users.doc(user.uid).update({"name": "$name"});
+        fsUser = await users.doc(user.uid).get();
+        firebaseUserData.value.addAll(
+            fsUser.data() == null ? {} : fsUser.data() as Map<String, dynamic>);
+        update();
+
+        ///}
+
+        Utils.showSuccess("Update Successful!");
+        Utils.dismissLoader();
+
+        return true;
+      } else {
+        Utils.showError("Update Failed!");
+        Utils.dismissLoader();
+
+        return false;
+      }
+    } catch (firebaseAuthException) {
+      print((firebaseAuthException as FirebaseAuthException).message);
+      Utils.showError("Signup Failed!");
+      Utils.dismissLoader();
+      return false;
+    }
   }
 }

@@ -14,55 +14,53 @@ class ShoppingCategories extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: Icon(
-            Icons.arrow_back,
-        color:Colors.white),
-        onPressed: () {
-          Navigator.pop(context);
-        },
-        ),
-        elevation: 1,
-        title: Text(
-          "Shopping Categories",
-          style: TextStyle(color: Colors.white),
-        ),
-        backgroundColor: Color.fromARGB(195, 71, 1, 83),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.settings, color: Colors.white),
+        appBar: AppBar(
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back, color: Colors.white),
             onPressed: () {
-              Get.to(() => SettingsCard());
+              Navigator.pop(context);
             },
           ),
-        ],
-      ),
-      body: Container(
-        padding: EdgeInsets.only(left: 16, top: 25, right: 16),
-         color: Colors.white,
-        child: ListView(
-          children: [
+          elevation: 1,
+          title: Text(
+            "Shopping Categories",
+            style: TextStyle(color: Colors.white),
+          ),
+          backgroundColor: Color.fromARGB(195, 71, 1, 83),
+          actions: [
+            IconButton(
+              icon: Icon(Icons.settings, color: Colors.white),
+              onPressed: () {
+                Get.to(() => SettingsCard());
+              },
+            ),
+          ],
+        ),
+        body: Container(
+          padding: EdgeInsets.only(left: 16, top: 25, right: 16),
+          color: Colors.white,
+          child: ListView(children: [
             SizedBox(
               height: 10,
             ),
             Row(
               children: [
                 Container(
-            width: 50,
-            height: 50,
-                decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage("images/babycare.webp"),
-                ),
-                ),
+                  width: 50,
+                  height: 50,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage("images/babycare.webp"),
+                    ),
+                  ),
                 ),
                 SizedBox(
                   width: 8,
                 ),
-                InkWell(onTap: () {
-                   Get.to(() => BabyCare());
-                              },
+                InkWell(
+                  onTap: () {
+                    Get.to(() => BabyCare());
+                  },
                   child: Text(
                     "Baby Care",
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
@@ -76,21 +74,21 @@ class ShoppingCategories extends StatelessWidget {
             Row(
               children: [
                 Container(
-            width: 50,
-            height: 50,
-                decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage("images/bottlefeeding.jpg"),
-                ),
-                ),
+                  width: 50,
+                  height: 50,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage("images/bottlefeeding.jpg"),
+                    ),
+                  ),
                 ),
                 SizedBox(
                   width: 8,
                 ),
-                InkWell
-                  (onTap: () {
-                   Get.to(() => BOttleFeeding());
-                              },
+                InkWell(
+                  onTap: () {
+                    Get.to(() => BOttleFeeding());
+                  },
                   child: Text(
                     "Bottle feeding",
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
@@ -104,20 +102,21 @@ class ShoppingCategories extends StatelessWidget {
             Row(
               children: [
                 Container(
-            width: 50,
-            height: 50,
-                decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage("images/breastfeeding.avif"),
-                ),
-                ),
+                  width: 50,
+                  height: 50,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage("images/breastfeeding.jpg"),
+                    ),
+                  ),
                 ),
                 SizedBox(
                   width: 8,
                 ),
-                InkWell(onTap: () {
-                   Get.to(() => BreastFeeding());
-                              },
+                InkWell(
+                  onTap: () {
+                    Get.to(() => BreastFeeding());
+                  },
                   child: Text(
                     "Breastfeeding",
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
@@ -131,20 +130,21 @@ class ShoppingCategories extends StatelessWidget {
             Row(
               children: [
                 Container(
-            width: 50,
-            height: 50,
-                decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage("images/changing.jpg"),
-                ),
-                ),
+                  width: 50,
+                  height: 50,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage("images/changing.jpg"),
+                    ),
+                  ),
                 ),
                 SizedBox(
                   width: 8,
                 ),
-                InkWell(onTap: () {
-                   Get.to(() => ChangingPage());
-                              },
+                InkWell(
+                  onTap: () {
+                    Get.to(() => ChangingPage());
+                  },
                   child: Text(
                     "Changing",
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
@@ -158,20 +158,21 @@ class ShoppingCategories extends StatelessWidget {
             Row(
               children: [
                 Container(
-            width: 50,
-            height: 50,
-                decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage("images/clothing.png"),
-                ),
-                ),
+                  width: 50,
+                  height: 50,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage("images/clothing.png"),
+                    ),
+                  ),
                 ),
                 SizedBox(
                   width: 8,
                 ),
-                InkWell(onTap: () {
-                   Get.to(() => ClothingPage());
-                              },
+                InkWell(
+                  onTap: () {
+                    Get.to(() => ClothingPage());
+                  },
                   child: Text(
                     "Clothing",
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
@@ -185,20 +186,21 @@ class ShoppingCategories extends StatelessWidget {
             Row(
               children: [
                 Container(
-            width: 50,
-            height: 50,
-                decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage("images/furniture.jpg"),
+                  width: 50,
+                  height: 50,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage("images/furniture.jpg"),
+                    ),
+                  ),
                 ),
-                ),
-                ),
-             SizedBox(
+                SizedBox(
                   width: 8,
                 ),
-                InkWell(onTap: () {
-                   Get.to(() => FurniturePage());
-                              },
+                InkWell(
+                  onTap: () {
+                    Get.to(() => FurniturePage());
+                  },
                   child: Text(
                     "Furniture",
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
@@ -209,24 +211,24 @@ class ShoppingCategories extends StatelessWidget {
             SizedBox(
               height: 40,
             ),
-            
             Row(
               children: [
                 Container(
-            width: 50,
-            height: 50,
-                decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage("images/travel.png"),
+                  width: 50,
+                  height: 50,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage("images/travel.png"),
+                    ),
+                  ),
                 ),
-                ),
-                ),
-            SizedBox(
+                SizedBox(
                   width: 8,
                 ),
-                InkWell(onTap: () {
-                   Get.to(() => TravelPage());
-                              },
+                InkWell(
+                  onTap: () {
+                    Get.to(() => TravelPage());
+                  },
                   child: Text(
                     "Travel",
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
@@ -234,11 +236,7 @@ class ShoppingCategories extends StatelessWidget {
                 ),
               ],
             ),
-          ]
-        ),
-        
-      )
-      );
-    
+          ]),
+        ));
   }
 }

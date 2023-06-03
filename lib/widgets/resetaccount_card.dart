@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pregnancy_helper/controllers/auth_controller.dart';
+import 'package:pregnancy_helper/screens/dashboard.dart';
 import 'package:pregnancy_helper/widgets/settings_card.dart';
 
 class ResetAccount extends StatelessWidget {
@@ -10,11 +12,11 @@ class ResetAccount extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           leading: IconButton(
-          icon: Icon(
-            Icons.arrow_back,
-        color:Colors.white),
-        onPressed: () {},
-        ),
+            icon: Icon(Icons.arrow_back, color: Colors.white),
+            onPressed: () {
+              Get.back();
+            },
+          ),
           elevation: 1,
           title: Text(
             "Reset my account",
@@ -22,12 +24,12 @@ class ResetAccount extends StatelessWidget {
           ),
           backgroundColor: Color.fromARGB(195, 71, 1, 83),
           actions: [
-            IconButton(
-              icon: Icon(Icons.settings, color: Colors.white),
-              onPressed: () {
-                Get.to(() => SettingsCard());
-              },
-            ),
+            // IconButton(
+            //   icon: Icon(Icons.settings, color: Colors.white),
+            //   onPressed: () {
+            //     Get.to(() => SettingsCard());
+            //   },
+            // ),
           ],
         ),
         body: Container(
@@ -44,7 +46,11 @@ class ResetAccount extends StatelessWidget {
                     borderRadius: BorderRadius.circular(20)),
                 backgroundColor: Color.fromARGB(195, 71, 1, 83),
               ),
-              onPressed: () {},
+              onPressed: () async {
+                await AuthController.to
+                    .updateUserData("", "", "", "", "", "", userIsNew: true);
+                Get.offAll(Dashboard());
+              },
               child: Text(
                 "OKAY ",
                 style: TextStyle(fontSize: 16, color: Colors.white70),
